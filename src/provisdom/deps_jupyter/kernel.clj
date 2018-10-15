@@ -30,7 +30,6 @@
                              :argv            ["python" (str kernel-script-filename) (first clj-args) "{connection_file}"]}))
 
 (defn create-kernel [kernel-dir & clj-args]
-  (println "++++" kernel-dir clj-args)
   (let [kernel-json (io/file kernel-dir "lein-clojure" "kernel.json")
         kernel-script (io/file kernel-dir "lein-clojure" "leinclojure.py")]
     (io/make-parents kernel-json)
@@ -49,7 +48,6 @@ the current supported systems are Linux Mac and Windows (In that order).")
 
   The kernel will be installed at <location>/lein-clojure."
   [& args]
-  (println "------" args (starts-with? (first args) "-"))
   (let [os (get-os)]
     (if (nil? os)
       (println architecture-not-yet-supported)

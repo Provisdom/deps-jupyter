@@ -81,17 +81,16 @@
   "
   ([sub-command & args]
    (let [cwd (-> (java.io.File. ".") .getAbsolutePath)
-         jupyter (first args)]
-     (println "****" sub-command args)
+         jupyter (or (System/getenv "PATH_TO_JUPYTER") "jupyter")]
      (case sub-command
        "install-kernel" (do
-                          (apply install-kernel (next args))
+                          (apply install-kernel args)
                           #_(install-and-enable-extension jupyter))
        "uninstall-kernel" (println (str "Not yet implemented.  You can use "
                                         "'jupyter kernelspec uninstall lein-clojure' "
                                         "to uninstall the kernel manually."))
-       "notebook" (apply notebook jupyter cwd (next args))         ;; main entry
-       "lab" (apply lab jupyter cwd (next args))
+       "notebook" (apply notebook jupyter cwd args)         ;; main entry
+       "lab" (apply lab jupyter cwd args)
        "kernel" (apply j/-main args)             ;; hidden kernel
        (println (:doc (meta #'jupyter))))))
   ([]
