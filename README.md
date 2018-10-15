@@ -12,7 +12,7 @@ Define aliases for containing any dependencies required to run your Clojure note
 {:paths   ["src" "resources"]
  :deps    {org.clojure/clojure {:mvn/version "1.9.0"}}
  :aliases {:jupyter {provisdom/deps-jupyter {:git/url "git@github.com:Provisdom/deps-jupyter.git"
-                                             :sha "460a7c9093a604929540b102196cd24881b16462"}}
+                                             :sha "bc80f3e5dbc597c44fbcf2b53ac3603728a3565d"}}
            :kernel {:extra-deps {provisdom/veja {:mvn/version "0.2.0"}}}
            :install-kernel {:main-opts ["-m" "provisdom.deps-jupyter" "install-kernel" "-A:jupyter:kernel"]}
            :lab {:main-opts  ["-m" "provisdom.deps-jupyter" "lab"]}}}
