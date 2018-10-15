@@ -5,7 +5,7 @@ import sys
 
 def main(lein_working_directory, argv):
     os.chdir(lein_working_directory)
-    os.execvp('clj', ['clj', '-A:jupyter', '-m', 'provisdom.deps-jupyter', 'kernel'] + argv)
+    os.execvp('clj', ['clj', argv[0], '-m', 'provisdom.deps-jupyter', 'kernel'] + argv[1:])
 
 if __name__ == '__main__':
     if 'PROJECT_WORKING_DIRECTORY' not in os.environ:

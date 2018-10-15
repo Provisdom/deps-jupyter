@@ -1,7 +1,7 @@
 (ns provisdom.deps-jupyter.kernel
   (:require [clojure.java.io :as io]
             [cheshire.core :as cheshire]
-            [clojure.string :refer [lower-case includes?]]))
+            [clojure.string :refer [lower-case includes? starts-with?]]))
 
 (def python-kernel-script (-> "leinclojure.py" io/resource slurp))
 
@@ -22,18 +22,19 @@
       :linux (io/file home ".local/share/jupyter/kernels")
       :windows (io/file appdata "jupyter/kernels"))))
 
-(defn get-kernel-json [kernel-script-filename]
+(defn get-kernel-json [kernel-script-filename clj-args]
   (cheshire/generate-string {:display_name    "Lein-Clojure"
                              :language        "clojure"
                              :codemirror_mode "clojure"
                              :mimetype        "text/x-clojure"
-                             :argv            ["python" (str kernel-script-filename) "{connection_file}"]}))
+                             :argv            ["python" (str kernel-script-filename) (first clj-args) "{connection_file}"]}))
 
-(defn create-kernel [kernel-dir]
+(defn create-kernel [kernel-dir & clj-args]
+  (println "++++" kernel-dir clj-args)
   (let [kernel-json (io/file kernel-dir "lein-clojure" "kernel.json")
         kernel-script (io/file kernel-dir "lein-clojure" "leinclojure.py")]
     (io/make-parents kernel-json)
-    (spit (str kernel-json) (get-kernel-json kernel-script))
+    (spit (str kernel-json) (get-kernel-json kernel-script clj-args))
     (spit (str kernel-script) python-kernel-script)))
 
 (def architecture-not-yet-supported "You system is not supported by lein jupyter.
@@ -47,14 +48,14 @@ the current supported systems are Linux Mac and Windows (In that order).")
   directory.
 
   The kernel will be installed at <location>/lein-clojure."
-  ([location]
-   (-> location io/as-file create-kernel)
-   (println "kernel successfully installed at " (str location)))
-  ([]
-   (let [os (get-os)]
-     (if (nil? os)
-       (println architecture-not-yet-supported)
-       (-> os (get-platform-specific-kernel-dir (System/getenv)) install-kernel)))))
+  [& args]
+  (println "------" args (starts-with? (first args) "-"))
+  (let [os (get-os)]
+    (if (nil? os)
+      (println architecture-not-yet-supported)
+      (apply create-kernel (if (starts-with? (first args) "-")
+                             (cons (get-platform-specific-kernel-dir os (System/getenv)) args)
+                             (cons (io/as-file (first args)) (rest args)))))))
 
 (defn kernel-installed?
   "return true if it is sensible to believe that kernel has properly been installed"
