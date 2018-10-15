@@ -88,7 +88,7 @@
      (case sub-command
        "install-kernel" (do
                           (apply install-kernel args)
-                          #_(install-and-enable-extension jupyter))
+                          (install-and-enable-extension jupyter))
        "uninstall-kernel" (println (str "Not yet implemented.  You can use "
                                         "'jupyter kernelspec uninstall lein-clojure' "
                                         "to uninstall the kernel manually."))
