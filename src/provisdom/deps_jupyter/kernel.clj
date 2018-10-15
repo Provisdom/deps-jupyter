@@ -1,3 +1,5 @@
+;;; Derived from src/leiningen/jupyter/kernel.clj in clojupyter/lein-jupyter project.
+;;; https://github.com/clojupyter/lein-jupyter/blob/0d7e00f983118c1e65039d5edb0c1333fabfc7fa/src/leiningen/jupyter/kernel.clj
 (ns provisdom.deps-jupyter.kernel
   (:require [clojure.java.io :as io]
             [cheshire.core :as cheshire]

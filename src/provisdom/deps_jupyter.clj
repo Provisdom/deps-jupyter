@@ -1,3 +1,6 @@
+;;; Derived from src/leiningen/jupyter.clj in clojupyter/lein-jupyter project.
+;;; https://github.com/clojupyter/lein-jupyter/blob/0d7e00f983118c1e65039d5edb0c1333fabfc7fa/src/leiningen/jupyter.clj
+
 (ns provisdom.deps-jupyter
   (:require [provisdom.deps-jupyter.extension :refer [install-and-enable-extension]]
             [provisdom.deps-jupyter.kernel :refer [install-kernel

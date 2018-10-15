@@ -1,3 +1,6 @@
+;;; Derived from src/leiningen/jupyter/extension.clj in clojupyter/lein-jupyter project.
+;;; https://github.com/clojupyter/lein-jupyter/blob/0d7e00f983118c1e65039d5edb0c1333fabfc7fa/src/leiningen/jupyter/extension.clj
+
 (ns provisdom.deps-jupyter.extension
   (:require [clojure.java.io :as io]
             [clojure.java.shell :refer [sh]])
