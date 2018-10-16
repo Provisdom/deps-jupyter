@@ -1,5 +1,6 @@
 {:paths ["resources" "src"]
  :deps {org.clojure/clojure {:mvn/version "1.9.0"}
         cheshire {:mvn/version "5.8.1"}
-        org.clojars.didiercrunch/clojupyter {:mvn/version "0.1.5"}
+        clojupyter/clojupyter {:git/url "git@github.com:Provisdom/clojupyter.git"
+                               :sha "e1d42ced718ac8bf710034455133925c16d02b3e"}
         org.apache.commons/commons-exec {:mvn/version "1.3"}}}
