@@ -84,7 +84,7 @@
   "
   ([sub-command & args]
    (let [cwd (-> (java.io.File. ".") .getAbsolutePath)
-         jupyter (or (System/getenv "PATH_TO_JUPYTER") "jupyter")]
+         jupyter "jupyter" #_(or (System/getenv "PATH_TO_JUPYTER") "jupyter")]
      (case sub-command
        "install-kernel" (do
                           (apply install-kernel args)
