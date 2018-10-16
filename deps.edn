@@ -2,5 +2,5 @@
  :deps {org.clojure/clojure {:mvn/version "1.9.0"}
         cheshire {:mvn/version "5.8.1"}
         clojupyter/clojupyter {:git/url "git@github.com:Provisdom/clojupyter.git"
-                               :sha "e1d42ced718ac8bf710034455133925c16d02b3e"}
+                               :sha "47dd794fd435de71369fb1ddae8c7e56d30aa85f"}
         org.apache.commons/commons-exec {:mvn/version "1.3"}}}
